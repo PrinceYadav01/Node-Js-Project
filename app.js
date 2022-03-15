@@ -1,21 +1,45 @@
-// npm --version
+const { readFile, writeFile } = require('fs').promises
+// const util = require('util')
+// const readFilePromise = util.promisify(readFile)
+// const writeFilePromise = util.promisify(writeFile)
 
-// local depen
-// npm i <packageName>
+const start = async () => {
+    try {
+        const first = await readFile('./content/first.txt', 'utf8');
+        const second = await readFile('./content/second.txt', 'utf8');
+        console.log(first, second)
+        await writeFile(
+            './content/result-mind-grenade.txt',
+            `This is Awesome : ${first} ${second}`,
+            { flag: 'a'}
+        )
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-// npm install -g <packageName>
-// global dependency
-// sudo nano npm i -g <packageName>
+start()
 
+// const getText = (path) => {
+//     return new Promise((resolve, reject) => {
+//         readFile(path, 'utf8', (err, res) => {
+//             if (err) {
+//                 reject(err)
+//             }
+//             resolve(res)
+//         })
+//     })
 
-// npm init
-// Create package.json ( Initialize Package)
-// npm init -y 
-// Create package with default params
+// }
 
-const _ = require('lodash');
+// const start = async () => {
+//     try {
+//         const first = await getText('./content/first.txt');
+//         const second = await getText('./content/second.txt');
+//         console.log(first, second)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
-const items = [1,[2,[3,[4]]]];
-
-const newItems = _.flattenDeep(items);
-console.log(newItems);
+// start()
